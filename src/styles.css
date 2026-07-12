@@ -1,0 +1,376 @@
+/* ============================================================
+   Sinapsă & Sens — foaie de stil globală
+   Filosofie × neuroștiințe · registru editorial, clasic, calm
+   ============================================================ */
+
+:root {
+  --paper:#e7e1d1; --paper-2:#e0d9c7; --surface:#efe9da; --surface-2:#e7e0cf;
+  --ink:#15120c; --ink-soft:#4e463a; --ink-faint:#8a8069;
+  --line:rgba(21,18,12,.16); --line-strong:rgba(21,18,12,.33);
+  --accent:#8a6f34; --accent-soft:#a98c54; --accent-tint:rgba(138,111,52,.12);
+  --gold:#a98c54;
+  --shadow:0 1px 0 rgba(33,31,28,.04),0 26px 50px -34px rgba(33,31,28,.5);
+  --serif:"Hoefler Text","Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --display:"Bodoni 72","Bodoni 72 Oldstyle","Didot","Playfair Display","Hoefler Text",Georgia,serif;
+  --maxw:1320px;
+  --btn:#181a19; --btn-ink:#f2efe8;
+  --tex-wash:linear-gradient(rgba(231,225,209,.14),rgba(231,225,209,.14));
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#100e0a; --paper-2:#0b0a06; --surface:#17140d; --surface-2:#131009;
+    --ink:#ece5d3; --ink-soft:#a89e86; --ink-faint:#6f6653;
+    --line:rgba(236,229,211,.13); --line-strong:rgba(236,229,211,.28);
+    --accent:#c3a666; --accent-soft:#a98c54; --accent-tint:rgba(195,166,102,.13);
+    --gold:#c3a666;
+    --shadow:0 1px 0 rgba(0,0,0,.5),0 30px 56px -32px rgba(0,0,0,.85);
+    --tex-wash:linear-gradient(rgba(16,14,10,.9),rgba(16,14,10,.93));
+  }
+}
+:root[data-theme="light"]{
+  --paper:#e7e1d1; --paper-2:#e0d9c7; --surface:#efe9da; --surface-2:#e7e0cf;
+  --ink:#15120c; --ink-soft:#4e463a; --ink-faint:#8a8069;
+  --line:rgba(21,18,12,.16); --line-strong:rgba(21,18,12,.33);
+  --accent:#8a6f34; --accent-soft:#a98c54; --accent-tint:rgba(138,111,52,.12);
+  --gold:#a98c54;
+  --shadow:0 1px 0 rgba(33,31,28,.04),0 26px 50px -34px rgba(33,31,28,.5);
+  --tex-wash:linear-gradient(rgba(231,225,209,.14),rgba(231,225,209,.14));
+}
+:root[data-theme="dark"]{
+  --paper:#100e0a; --paper-2:#0b0a06; --surface:#17140d; --surface-2:#131009;
+  --ink:#ece5d3; --ink-soft:#a89e86; --ink-faint:#6f6653;
+  --line:rgba(236,229,211,.13); --line-strong:rgba(236,229,211,.28);
+  --accent:#c3a666; --accent-soft:#a98c54; --accent-tint:rgba(195,166,102,.13);
+  --gold:#c3a666;
+  --shadow:0 1px 0 rgba(0,0,0,.5),0 30px 56px -32px rgba(0,0,0,.85);
+  --tex-wash:linear-gradient(rgba(16,14,10,.9),rgba(16,14,10,.93));
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--ink);background-color:var(--paper);
+  font-family:var(--serif);line-height:1.6;font-size:17px;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+/* Fundal-textură pe tot site-ul: pseudo-element fix, robust și pe iOS
+   (unde background-attachment:fixed nu funcționează corect). */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-color:var(--paper);
+  background-image:var(--tex-wash),url('./assets/texture.jpg');
+  background-size:cover,cover;
+  background-position:center center,center center;
+  background-repeat:no-repeat,no-repeat;
+}
+::selection{background:var(--accent-tint);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+:focus-visible{outline:1.5px solid var(--accent);outline-offset:3px;border-radius:1px}
+img,svg{display:block;max-width:100%}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+.eyebrow{font-variant-caps:all-small-caps;letter-spacing:.16em;font-size:14px;
+  color:var(--ink-faint);font-weight:500}
+
+/* ---------------- Header ---------------- */
+.site-header{position:sticky;top:0;z-index:40;
+  background-color:var(--paper);
+  background-image:var(--tex-wash),url('./assets/texture.jpg');
+  background-size:cover,cover;
+  background-position:center center,center center;
+  background-repeat:no-repeat,no-repeat;
+  background-attachment:fixed,fixed}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:78px}
+.brandmeta{flex:1;min-width:0}
+.brandmeta .tag{font-style:italic;color:var(--ink-soft);font-size:15px}
+.logo{flex:0 0 auto;text-align:center;line-height:1}
+.logo a{display:inline-flex;align-items:center;justify-content:center;padding:4px 10px}
+.logo img{width:clamp(156px,14vw,192px);height:auto;filter:none;transition:filter .25s ease}
+@media (prefers-color-scheme:dark){
+  .logo img{filter:invert(1)}
+}
+:root[data-theme="light"] .logo img{filter:none}
+:root[data-theme="dark"] .logo img{filter:invert(1)}
+.topright{flex:1;display:flex;justify-content:flex-end;align-items:center;gap:22px}
+.txtlink{background:none;border:0;cursor:pointer;color:var(--ink-soft);
+  font-size:15px;font-variant-caps:all-small-caps;letter-spacing:.1em;padding:4px 0;position:relative}
+.txtlink::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:var(--accent);transition:right .3s cubic-bezier(.2,.7,.2,1)}
+.txtlink:hover{color:var(--ink)}.txtlink:hover::after{right:0}
+.btn-outline{color:var(--btn-ink);border:1px solid var(--line-strong);border-radius:1px;
+  padding:9px 18px;font-variant-caps:all-small-caps;letter-spacing:.1em;font-size:14px;
+  background:var(--btn);cursor:pointer;transition:.25s}
+.btn-outline:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.main-nav{border-top:1px solid var(--line)}
+.main-nav ul{display:flex;gap:clamp(18px,3.4vw,54px);justify-content:center;flex-wrap:wrap;
+  list-style:none;margin:0;padding:15px 0}
+.main-nav a{font-size:clamp(16px,1.5vw,19px);position:relative;padding:4px 2px}
+.main-nav a::after{content:"";position:absolute;left:50%;right:50%;bottom:-1px;height:1px;
+  background:var(--accent);transition:left .3s,right .3s}
+.main-nav a:hover::after,.main-nav a[aria-current="page"]::after{left:0;right:0}
+.main-nav a[aria-current="page"]{color:var(--accent)}
+
+/* ---------------- Hero ---------------- */
+.hero{padding:clamp(30px,4.5vw,58px) 0 clamp(28px,4vw,52px)}
+/* Hero-ul folosește o lățime puțin mai mare decât restul paginii: cele două
+   coloane exterioare sunt identice, deci portretul cade exact pe axa paginii. */
+.hero>.wrap{max-width:1600px}
+.herotop{display:grid;gap:clamp(16px,1.8vw,30px);align-items:center;
+  grid-template-columns:
+    minmax(0,1fr) minmax(140px,172px) minmax(320px,384px) minmax(140px,172px) minmax(240px,1fr);
+  grid-template-areas:"fragment left media right agenda"}
+.fragment{grid-area:fragment;align-self:center;max-width:230px;padding-right:8px}
+.fragment .mark{display:block;font-size:48px;line-height:.3;color:var(--gold);opacity:.6;margin-bottom:16px}
+.fragment blockquote{margin:0;font-style:italic;color:var(--ink-soft);
+  font-size:15.5px;line-height:1.5;text-wrap:pretty}
+.fragment .attr{margin-top:16px;font-variant-caps:all-small-caps;letter-spacing:.13em;
+  font-size:12px;color:var(--ink-faint);white-space:nowrap}
+.rail.left{grid-area:left}
+.mediacol{grid-area:media}
+.rail.right{grid-area:right}
+
+/* Rails — borderless buttons, hairline separators */
+.rail{display:flex;flex-direction:column;justify-content:center}
+.rail .lbl{margin:0 0 14px}
+.rail.right .lbl{text-align:right}
+.railbtn{display:flex;align-items:baseline;gap:12px;padding:14px 2px;background:none;border:0;
+  border-top:1px solid var(--line);cursor:pointer;color:var(--ink);text-align:left;width:100%;
+  font-size:clamp(17px,1.7vw,20px);transition:padding .25s,color .25s}
+.rail.right .railbtn{flex-direction:row-reverse;text-align:right}
+.railbtn:last-child{border-bottom:1px solid var(--line)}
+.railbtn .num{font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums;
+  font-style:italic;margin-left:auto;transition:.25s}
+.rail.right .railbtn .num{margin-left:0;margin-right:auto;font-style:normal}
+.railbtn:hover{color:var(--accent);padding-left:14px}
+.rail.right .railbtn:hover{padding-left:2px;padding-right:14px}
+.railbtn:hover .num{color:var(--accent)}
+
+/* Medallion */
+.mediacol{display:flex;justify-content:center}
+.stage{position:relative;width:min(100%,384px);aspect-ratio:1}
+.medallion{position:absolute;inset:0;display:grid;place-items:center;overflow:visible}
+/* Portret în cerneală pe hârtie: fundalul alb al ilustrației dispare prin
+   „multiply" pe temă deschisă; pe temă întunecată inversăm și folosim „screen". */
+.medallion-portrait{position:absolute;inset:-6%;width:112%;height:112%;object-fit:contain;
+  object-position:center center;mix-blend-mode:multiply}
+@media (prefers-color-scheme:dark){
+  .medallion-portrait{filter:invert(1);mix-blend-mode:screen}
+}
+:root[data-theme="light"] .medallion-portrait{filter:none;mix-blend-mode:multiply}
+:root[data-theme="dark"] .medallion-portrait{filter:invert(1);mix-blend-mode:screen}
+.intaglio{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.intaglio .ring{fill:none;stroke:var(--line-strong)}
+.intaglio .laurel{fill:none;stroke:var(--accent-soft);stroke-width:1.4;stroke-linecap:round}
+.intaglio .leaf{fill:var(--accent-soft);opacity:.9}
+.intaglio .asterism{fill:var(--gold)}
+.lockup{position:relative;text-align:center;transform:translateY(-6px)}
+.lockup .initials{font-family:var(--display);font-size:clamp(50px,10vw,72px);font-weight:600;
+  letter-spacing:.02em;color:var(--ink);line-height:1}
+.lockup .initials .fig{font-style:italic;color:var(--accent);font-weight:500}
+.lockup .est{font-variant-caps:all-small-caps;letter-spacing:.3em;font-size:11px;
+  color:var(--ink-faint);margin-top:8px;padding-left:.3em}
+
+/* Rotating margin-note */
+.bubble{position:absolute;top:-58px;right:-70px;width:206px;text-align:left;z-index:3;
+  background:color-mix(in oklab,var(--surface) 94%,var(--paper));
+  border:1px solid var(--line);border-radius:15px 15px 15px 7px;
+  padding:15px 18px;
+  box-shadow:0 16px 30px -25px color-mix(in oklab,var(--ink) 45%,transparent)}
+.bubble .title{font-style:italic;font-size:16.5px;line-height:1.3;min-height:2.6em;
+  transition:opacity .55s ease;color:var(--ink)}
+.bubble .title.out{opacity:0}
+.bubble-tail{position:absolute;left:8px;bottom:-19px;width:36px;height:22px;
+  overflow:visible;pointer-events:none}
+.bubble-tail .tail-fill{fill:color-mix(in oklab,var(--surface) 94%,var(--paper))}
+.bubble-tail .tail-line{fill:none;stroke:var(--line);stroke-width:1.15;
+  stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+
+/* Masthead (identity) under the medallion row */
+.heromast{max-width:47ch;margin:clamp(26px,3.4vw,44px) auto 0;text-align:center}
+.heromast h1{font-family:var(--display);font-weight:600;letter-spacing:.005em;text-wrap:balance;
+  font-size:clamp(32px,4.8vw,52px);line-height:1.02;margin:0 0 6px}
+.heromast .role{font-variant-caps:all-small-caps;letter-spacing:.15em;font-size:14.5px;
+  color:var(--accent);margin-bottom:16px}
+.heromast .epigraph{font-style:italic;color:var(--ink-soft);font-size:clamp(16px,1.7vw,18px);
+  margin:0 auto 14px;max-width:40ch}
+.heromast .epigraph::before{content:"";display:block;width:34px;height:1px;background:var(--gold);
+  margin:0 auto 14px;opacity:.7}
+.heromast .bio{color:var(--ink-soft);font-size:clamp(15px,1.6vw,17px);margin:0 auto;max-width:44ch}
+.heromast .field{margin-top:16px;color:var(--ink-faint);font-variant-caps:all-small-caps;
+  letter-spacing:.08em;font-size:14px}
+.heromast .field span:not(:last-child)::after{content:" · ";color:var(--line-strong)}
+
+.dots{display:flex;gap:11px;justify-content:center;align-items:center;margin-top:24px}
+.dots .dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--line-strong);
+  background:transparent;cursor:pointer;padding:0;transition:.25s}
+.dots .dot[aria-selected="true"]{background:var(--accent);border-color:var(--accent);transform:scale(1.3)}
+.nav-arrows{display:flex;gap:2px;margin-left:8px}
+.nav-arrows button{width:28px;height:28px;border:0;background:none;color:var(--ink-faint);
+  cursor:pointer;font-size:20px;line-height:1;transition:.2s}
+.nav-arrows button:hover{color:var(--accent)}
+
+/* Agenda — coloană editorială, în limbajul rail-urilor:
+   linii subțiri, fără casetă, fără umbre. */
+.agenda{grid-area:agenda;display:flex;flex-direction:column;align-self:center;
+  height:430px;min-width:0}
+.agenda .ahead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  margin-bottom:14px}
+.agenda .cnt{font-size:12px;color:var(--ink-faint);font-style:italic;
+  font-variant-numeric:tabular-nums}
+.agenda .frame{flex:1;min-height:0;display:flex;flex-direction:column;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ticker{position:relative;flex:1;min-height:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(180deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;flex-direction:column;animation:scroll 48s linear infinite;will-change:transform}
+.ticker:hover .track,.ticker:focus-within .track{animation-play-state:paused}
+@keyframes scroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.evt{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;
+  padding:15px 2px;border-bottom:1px solid var(--line);cursor:pointer;
+  transition:background .25s,padding .25s;text-align:left}
+.evt:hover{background:var(--accent-tint);padding-left:10px}
+.evt .date{display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:2px}
+.evt .day{font-family:var(--display);font-size:25px;font-weight:600;line-height:1;
+  font-variant-numeric:tabular-nums}
+.evt .mon{font-variant-caps:all-small-caps;letter-spacing:.18em;font-size:12px;
+  color:var(--ink-faint);padding-left:.18em}
+.evt .meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.evt .type{font-variant-caps:all-small-caps;letter-spacing:.14em;font-size:12.5px;
+  color:var(--accent)}
+.evt.webinar .type{color:var(--gold)}
+.evt .time{font-size:12.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums;
+  font-style:italic;white-space:nowrap}
+.evt h4{font-size:16.5px;margin:5px 0 0;line-height:1.25;font-weight:600;letter-spacing:-.005em;
+  transition:color .2s}
+.evt:hover h4{color:var(--accent)}
+.agenda .alink{margin-top:14px;align-self:flex-start;color:var(--ink-soft);
+  font-variant-caps:all-small-caps;letter-spacing:.1em;font-size:14px;
+  position:relative;padding-bottom:3px}
+.agenda .alink::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:var(--accent);transition:right .3s}
+.agenda .alink:hover{color:var(--accent)}.agenda .alink:hover::after{right:0}
+
+/* ---------------- Section scaffolding ---------------- */
+.section{padding:clamp(40px,6vw,84px) 0}
+.section.tinted{background:color-mix(in oklab,var(--ink) 4%,transparent)}
+.shead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:clamp(26px,3.2vw,44px)}
+.shead .lead .eyebrow{display:block;margin-bottom:6px}
+.shead h2{font-family:var(--display);font-size:clamp(25px,3.4vw,38px);font-weight:600;
+  text-transform:uppercase;letter-spacing:.035em;margin:0;line-height:1.04;text-wrap:balance}
+.shead .more{color:var(--ink-soft);font-variant-caps:all-small-caps;letter-spacing:.1em;
+  font-size:15px;white-space:nowrap;position:relative;padding-bottom:3px}
+.shead .more::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:var(--accent);transition:right .3s}
+.shead .more:hover{color:var(--accent)}.shead .more:hover::after{right:0}
+
+/* Articole */
+.arts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,2.6vw,44px)}
+.art{border-top:1px solid var(--line-strong);padding-top:18px;cursor:pointer;
+  display:flex;flex-direction:column;gap:10px}
+.art .dom{font-variant-caps:all-small-caps;letter-spacing:.13em;font-size:13px;color:var(--accent)}
+.art h3{font-size:clamp(20px,2vw,25px);font-weight:600;line-height:1.14;letter-spacing:-.01em;
+  margin:0;text-wrap:balance;transition:color .2s}
+.art:hover h3{color:var(--accent)}
+.art .dek{color:var(--ink-soft);font-size:15.5px;margin:0}
+.art .meta{margin-top:auto;padding-top:10px;color:var(--ink-faint);
+  font-variant-caps:all-small-caps;letter-spacing:.08em;font-size:13px;
+  display:flex;gap:10px;align-items:center}
+.art .meta .sep{width:3px;height:3px;border-radius:50%;background:var(--line-strong)}
+
+/* Domenii */
+.domains{display:flex;flex-direction:column}
+.domain{display:grid;grid-template-columns:minmax(180px,1fr) 2fr auto;gap:clamp(16px,3vw,44px);
+  align-items:baseline;padding:22px 4px;border-top:1px solid var(--line);cursor:pointer;
+  transition:padding .25s,background .25s}
+.domain:last-child{border-bottom:1px solid var(--line)}
+.domain:hover{padding-left:14px;background:var(--accent-tint)}
+.domain .n{font-size:clamp(20px,2.2vw,27px);font-weight:600;letter-spacing:-.01em}
+.domain:hover .n{color:var(--accent)}
+.domain .d{color:var(--ink-soft);font-size:15.5px}
+.domain .c{font-variant-caps:all-small-caps;letter-spacing:.1em;font-size:13.5px;color:var(--ink-faint);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* Manifesto */
+.manifesto{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:color-mix(in oklab,var(--ink) 5%,transparent);
+  padding:clamp(56px,9vw,120px) 0;text-align:center}
+.manifesto .mark{font-size:60px;line-height:.4;color:var(--gold);opacity:.6;
+  font-family:var(--serif);display:block;margin-bottom:10px}
+.manifesto blockquote{margin:0 auto;max-width:22ch;font-style:italic;text-wrap:balance;
+  font-size:clamp(26px,4.2vw,46px);line-height:1.18;letter-spacing:-.01em}
+.manifesto .attr{margin-top:26px;font-variant-caps:all-small-caps;letter-spacing:.16em;
+  font-size:13.5px;color:var(--ink-faint)}
+
+/* Newsletter */
+.news{text-align:center}
+.news .eyebrow{display:block;margin-bottom:10px}
+.news h2{font-family:var(--display);font-size:clamp(24px,3.4vw,38px);font-weight:600;
+  letter-spacing:.005em;margin:0 auto;max-width:20ch;text-wrap:balance;line-height:1.08}
+.news form{display:flex;gap:10px;max-width:452px;margin:26px auto 0;flex-wrap:wrap;
+  justify-content:center}
+.news input{flex:1;min-width:220px;padding:13px 16px;border:1px solid var(--line-strong);
+  background:color-mix(in oklab,var(--surface) 78%,transparent);color:var(--ink);
+  font-family:var(--serif);font-size:15.5px;border-radius:1px}
+.news input::placeholder{color:var(--ink-faint)}
+.news input:focus{outline:none;border-color:var(--accent)}
+.news .submit{padding:13px 24px;border:1px solid var(--line-strong);background:var(--btn);color:var(--btn-ink);
+  font-variant-caps:all-small-caps;letter-spacing:.1em;font-size:15px;cursor:pointer;
+  border-radius:1px;transition:.25s}
+.news .submit:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.news .note{margin-top:14px;color:var(--ink-faint);font-size:13.5px;font-style:italic}
+
+/* ---------------- Footer ---------------- */
+.site-footer{border-top:1px solid var(--line)}
+.foot{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:26px;
+  padding:32px 0 40px}
+.partners{display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(18px,3vw,44px)}
+.partners .k{margin-right:4px}
+.partners .p{font-size:16px;color:var(--ink-soft);letter-spacing:.01em;transition:.25s;
+  cursor:default;font-style:italic}
+.partners .p:hover{color:var(--ink)}
+.foot .copy{color:var(--ink-faint);font-size:14px;font-variant-caps:all-small-caps;letter-spacing:.1em}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width:1080px){
+  .herotop{grid-template-columns:1fr 1fr;
+    grid-template-areas:"media media" "left right" "agenda agenda";align-items:start}
+  .fragment{display:none}
+  .agenda{height:360px}
+  .rail{justify-content:flex-start}
+  .rail.right .railbtn{flex-direction:row;text-align:left}
+  .rail.right .railbtn .num{margin-left:auto;margin-right:0;font-style:italic}
+  .rail.right .lbl{text-align:left}
+  .arts{grid-template-columns:1fr 1fr}
+}
+/* Doar pe tabletă: al treilea articol ocupă rândul întreg, pe orizontală. */
+@media (min-width:641px) and (max-width:1080px){
+  .arts .art:last-child{grid-column:1 / -1;flex-direction:row;gap:24px;flex-wrap:wrap}
+  .arts .art:last-child h3{flex:1 1 300px}
+  .arts .art:last-child .dek{flex:2 1 300px}
+  .arts .art:last-child .meta{flex:1 1 100%}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .herotop{grid-template-columns:1fr;grid-template-areas:"media" "left" "right" "agenda"}
+  .bubble{position:static;max-width:none;margin:16px auto 0}
+  .bubble-tail{display:none}
+  .stage{width:min(78vw,320px)}
+  .topline{flex-wrap:wrap;justify-content:center;gap:10px 20px;padding:12px 0}
+  .brandmeta{display:none}
+  .logo{flex:1 1 100%;order:-1}
+  .logo img{width:168px}
+  .topright{flex:0 0 auto;gap:18px}
+  .arts{grid-template-columns:1fr}
+  .arts .art:last-child{flex-direction:column}
+  .domain{grid-template-columns:1fr;gap:6px}
+  .domain .c{grid-row:1;justify-self:start}
+  .shead{align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  .track{animation:none}
+  .ticker{-webkit-mask-image:none;mask-image:none;overflow-y:auto}
+  *{scroll-behavior:auto !important;transition:none !important}
+}
