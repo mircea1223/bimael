@@ -172,20 +172,18 @@ img,svg{display:block;max-width:100%}
 .lockup .est{font-variant-caps:all-small-caps;letter-spacing:.3em;font-size:11px;
   color:var(--ink-faint);margin-top:8px;padding-left:.3em}
 
-/* Rotating margin-note */
-.bubble{position:absolute;top:-58px;right:-70px;width:206px;text-align:left;z-index:3;
-  background:color-mix(in oklab,var(--surface) 94%,var(--paper));
-  border:1px solid var(--line);border-radius:15px 15px 15px 7px;
-  padding:15px 18px;
-  box-shadow:0 16px 30px -25px color-mix(in oklab,var(--ink) 45%,transparent)}
-.bubble .title{font-style:italic;font-size:16.5px;line-height:1.3;min-height:2.6em;
+/* Rotating margin-note — balon de dialog desenat de mână, în cerneală.
+   Schița e folosită ca mască umplută cu var(--ink), deci urmează tema. */
+.bubble{position:absolute;top:-84px;right:-64px;z-index:3;width:256px;
+  aspect-ratio:2860/1937;display:flex;align-items:center;text-align:left;
+  padding:20px 34px 46px 44px}
+.bubble::before{content:"";position:absolute;inset:0;background:var(--ink);
+  -webkit-mask:url('./assets/bubble-sketch.png') 0 0/100% 100% no-repeat;
+  mask:url('./assets/bubble-sketch.png') 0 0/100% 100% no-repeat;
+  pointer-events:none}
+.bubble .title{font-style:italic;font-size:16px;line-height:1.3;
   transition:opacity .55s ease;color:var(--ink)}
 .bubble .title.out{opacity:0}
-.bubble-tail{position:absolute;left:8px;bottom:-19px;width:36px;height:22px;
-  overflow:visible;pointer-events:none}
-.bubble-tail .tail-fill{fill:color-mix(in oklab,var(--surface) 94%,var(--paper))}
-.bubble-tail .tail-line{fill:none;stroke:var(--line);stroke-width:1.15;
-  stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 
 /* Masthead (identity) under the medallion row */
 .heromast{max-width:47ch;margin:clamp(26px,3.4vw,44px) auto 0;text-align:center}
@@ -334,9 +332,19 @@ img,svg{display:block;max-width:100%}
 .foot .copy{color:var(--ink-faint);font-size:14px;font-variant-caps:all-small-caps;letter-spacing:.1em}
 
 /* ---------------- Responsive ---------------- */
+/* Între 1081–1360px cele cinci coloane nu mai încap: renunțăm la fragment
+   și păstrăm patru coloane echilibrate. */
+@media (min-width:1081px) and (max-width:1360px){
+  .fragment{display:none}
+  .herotop{grid-template-columns:
+    minmax(150px,1fr) minmax(320px,384px) minmax(150px,1fr) minmax(260px,1.25fr);
+    grid-template-areas:"left media right agenda"}
+}
 @media (max-width:1080px){
   .herotop{grid-template-columns:1fr 1fr;
     grid-template-areas:"media media" "left right" "agenda agenda";align-items:start}
+  /* Balonul iese deasupra medalionului; îi rezervăm loc sub antet. */
+  .mediacol{padding-top:110px}
   .fragment{display:none}
   .agenda{height:360px}
   .rail{justify-content:flex-start}
@@ -355,8 +363,10 @@ img,svg{display:block;max-width:100%}
 @media (max-width:640px){
   body{font-size:16px}
   .herotop{grid-template-columns:1fr;grid-template-areas:"media" "left" "right" "agenda"}
-  .bubble{position:static;max-width:none;margin:16px auto 0}
-  .bubble-tail{display:none}
+  /* Balonul rămâne absolut (masca ::before se ancorează de el),
+     iar medalionul primește loc deasupra pentru el. */
+  .mediacol{padding-top:150px}
+  .bubble{top:-148px;right:-6px}
   .stage{width:min(78vw,320px)}
   .topline{flex-wrap:wrap;justify-content:center;gap:10px 20px;padding:12px 0}
   .brandmeta{display:none}

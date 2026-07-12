@@ -62,7 +62,6 @@ export default function Hero() {
 
           {/* Rail stânga — rubricile autorului */}
           <nav className="rail left" aria-label="Rubrici autor">
-            <span className="eyebrow lbl">Autor</span>
             {leftRail.map((b) => (
               <button className="railbtn" type="button" key={b.label}>
                 {b.label}
@@ -76,10 +75,6 @@ export default function Hero() {
             <div className="stage">
               <div className="bubble" role="status" aria-live="polite">
                 <div className={`title ${fading ? 'out' : ''}`}>{title}</div>
-                <svg className="bubble-tail" viewBox="0 0 36 22" aria-hidden="true">
-                  <path className="tail-fill" d="M0 0 C8 3 12 11 14 20 C19 12 25 5 36 0 Z" />
-                  <path className="tail-line" d="M0 0 C8 3 12 11 14 20 C19 12 25 5 36 0" />
-                </svg>
               </div>
               <Medallion />
             </div>
@@ -87,7 +82,6 @@ export default function Hero() {
 
           {/* Rail dreapta — platforma */}
           <nav className="rail right" aria-label="Platformă">
-            <span className="eyebrow lbl">Platformă</span>
             {rightRail.map((label) => (
               <button className="railbtn" type="button" key={label}>
                 {label}
