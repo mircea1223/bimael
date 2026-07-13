@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Artifact",
+      "Bash(sed 's/<html lang=\"ro\">/<html lang=\"ro\" data-theme=\"dark\">/' /Users/mirceaprecup/marian/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --hide-scrollbars --disable-gpu --window-size=1440,1500 --screenshot=/private/tmp/claude-501/-Users-mirceaprecup-marian/8bbe00ed-2f6a-4f2c-8d3a-c9ebf7fa8754/scratchpad/shot-desktop-light.png file:///Users/mirceaprecup/marian/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --hide-scrollbars --disable-gpu --window-size=1440,1500 --screenshot=/private/tmp/claude-501/-Users-mirceaprecup-marian/8bbe00ed-2f6a-4f2c-8d3a-c9ebf7fa8754/scratchpad/shot-desktop-dark.png file:///private/tmp/claude-501/-Users-mirceaprecup-marian/8bbe00ed-2f6a-4f2c-8d3a-c9ebf7fa8754/scratchpad/dark.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --hide-scrollbars --disable-gpu --window-size=390,1600 --screenshot=/private/tmp/claude-501/-Users-mirceaprecup-marian/8bbe00ed-2f6a-4f2c-8d3a-c9ebf7fa8754/scratchpad/shot-mobile-light.png file:///Users/mirceaprecup/marian/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --hide-scrollbars --disable-gpu --window-size=820,1400 --screenshot=/private/tmp/claude-501/-Users-mirceaprecup-marian/8bbe00ed-2f6a-4f2c-8d3a-c9ebf7fa8754/scratchpad/shot-tablet-light.png file:///Users/mirceaprecup/marian/index.html)",
+      "Bash(rm -f index.html)",
+      "Bash(mkdir -p src/components)"
+    ]
+  }
+}
