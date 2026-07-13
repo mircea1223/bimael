@@ -65,6 +65,9 @@ html { scroll-behavior: smooth; text-size-adjust: 100%; }
 body {
   margin: 0;
   min-width: 320px;
+  /* Agenda copertei iese din shell spre dreapta; 100vw include scrollbar-ul,
+     deci tăiem orice depășire orizontală de un pixel-doi. */
+  overflow-x: clip;
   background: var(--canvas);
   color: var(--text);
   font-family: var(--serif);
@@ -238,12 +241,13 @@ h1, h2 { font-family: var(--display); font-weight: 600; }
 .cover-story h1 { max-width: 9ch; margin: .7rem 0 1.2rem; font-size: clamp(3.6rem, 6.7vw, 7.5rem); letter-spacing: -.055em; line-height: .82; }
 .cover-dek { max-width: 52ch; color: var(--muted); font-size: clamp(1.05rem, 1rem + .28vw, 1.25rem); }
 .cover-byline { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 1.5rem 0; color: var(--subtle); font-family: var(--sans); font-size: .73rem; letter-spacing: .07em; text-transform: uppercase; }
-.cover-author { position: relative; align-self: end; border-bottom: 1px solid var(--line); }
+/* Autorul evidențiat — identitate centrată, ca pe pagina de autor. */
+.cover-author { position: relative; align-self: end; text-align: center; }
 .cover-author .portrait { margin: 0 auto; }
 .cover-author .portrait figcaption { display: none; }
-.cover-author > div { position: relative; padding: 1rem .25rem 1.25rem; background: var(--canvas); }
-.cover-author h2 { margin: .2rem 0; font-size: 1.7rem; }
-.cover-author p { margin: 0 0 .45rem; color: var(--muted); font-size: .9rem; }
+.cover-author > div { position: relative; padding: 1rem .25rem 1.25rem; }
+.cover-author h2 { margin: .35rem 0 .15rem; font-size: 1.85rem; letter-spacing: -.02em; line-height: .95; }
+.cover-author p { margin: 0 0 .55rem; color: var(--muted); font-size: .9rem; }
 .cover-author a { font-family: var(--sans); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .cover-figure-no { position: absolute; top: -1.5rem; right: 0; color: var(--accent-soft); font-family: var(--display); font-size: 3rem; font-style: italic; }
 .cover-agenda { align-self: stretch; }
@@ -665,6 +669,8 @@ dd { margin: 0; }
 /* Desktop cover: the author illustration is the geometric center of the composition. */
 @media (min-width: 1241px) {
   .cover {
+    /* Spațiul dintre shell și marginea ferestrei, pe o parte (minus o gardă). */
+    --cover-bleed: max(0px, calc((100vw - min(100vw - clamp(2rem, 7vw, 7rem), var(--shell))) / 2 - 2rem));
     position: relative;
     grid-template-columns: minmax(0, 1fr) 260px minmax(0, 1fr);
     column-gap: clamp(1.5rem, 2vw, 2.25rem);
@@ -672,7 +678,12 @@ dd { margin: 0; }
   .cover-index { position: absolute; top: clamp(1rem, 3vh, 2rem); left: 0; width: min(100%, 170px); }
   .cover-story { width: min(100%, 34rem); justify-self: end; grid-column: 1; grid-row: 1; }
   .cover-author { z-index: 1; width: 100%; justify-self: center; grid-column: 2; grid-row: 1; }
-  .cover-agenda { width: min(100%, 22.25rem); justify-self: end; grid-column: 3; grid-row: 1; }
+  /* Agenda iese din grilă spre dreapta, în marginea exterioară a shell-ului. */
+  .cover-agenda {
+    width: calc(min(100%, 22.25rem) + var(--cover-bleed));
+    margin-right: calc(-1 * var(--cover-bleed));
+    justify-self: end; grid-column: 3; grid-row: 1;
+  }
 }
 
 /* Desktop scale: stable across window height, zoom and aspect ratio. */
@@ -705,7 +716,7 @@ dd { margin: 0; }
   .cover-author { width: 100%; align-self: center; }
   .cover-author .portrait { width: min(100%, 210px); }
   .cover-author > div { padding: .65rem .25rem .8rem; }
-  .cover-author h2 { margin: .1rem 0; font-size: 1.35rem; line-height: 1.05; }
+  .cover-author h2 { margin: .25rem 0 .1rem; font-size: 1.55rem; line-height: 1; }
   .cover-author p { margin-bottom: .25rem; font-size: .78rem; line-height: 1.35; }
   .cover-figure-no { top: -.9rem; font-size: 2.4rem; }
   .cover-agenda { align-self: center; }
