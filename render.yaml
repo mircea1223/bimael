@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: bimael
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: NODE_ENV=production npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: SESSION_SECRET
+        generateValue: true

@@ -673,16 +673,19 @@ dd { margin: 0; }
     --cover-bleed: max(0px, calc((100vw - min(100vw - clamp(2rem, 7vw, 7rem), var(--shell))) / 2 - 2rem));
     position: relative;
     grid-template-columns: minmax(0, 1fr) 260px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
     column-gap: clamp(1.5rem, 2vw, 2.25rem);
   }
-  .cover-index { position: absolute; top: clamp(1rem, 3vh, 2rem); left: 0; width: min(100%, 170px); }
-  .cover-story { width: min(100%, 34rem); justify-self: end; grid-column: 1; grid-row: 1; }
-  .cover-author { z-index: 1; width: 100%; justify-self: center; grid-column: 2; grid-row: 1; }
+  /* Indexul stă în flux (rândul 1), deci eseul nu-l mai poate acoperi
+     pe ferestre scunde. */
+  .cover-index { align-self: start; justify-self: start; width: min(100%, 170px); grid-column: 1; grid-row: 1; }
+  .cover-story { width: min(100%, 34rem); justify-self: end; align-self: center; grid-column: 1; grid-row: 2; }
+  .cover-author { z-index: 1; width: 100%; justify-self: center; grid-column: 2; grid-row: 1 / -1; }
   /* Agenda iese din grilă spre dreapta, în marginea exterioară a shell-ului. */
   .cover-agenda {
     width: calc(min(100%, 22.25rem) + var(--cover-bleed));
     margin-right: calc(-1 * var(--cover-bleed));
-    justify-self: end; grid-column: 3; grid-row: 1;
+    justify-self: end; align-self: center; grid-column: 3; grid-row: 1 / -1;
   }
 }
 
@@ -752,8 +755,18 @@ dd { margin: 0; }
   .header-top { grid-template-columns: 1fr auto 1fr; }
   .brand { grid-column: 2; }
   .header-actions { grid-column: 3; }
-  .cover { min-height: auto; grid-template-columns: 160px 1fr 280px; }
-  .cover-agenda { grid-column: 1 / -1; }
+  .cover {
+    min-height: auto;
+    grid-template-columns: minmax(0, 1.5fr) minmax(240px, .8fr);
+    grid-template-areas: "index index" "story author" "agenda agenda";
+  }
+  /* Indexul devine o bandă compactă deasupra compoziției. */
+  .cover-index { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem 1.5rem; grid-area: index; }
+  .cover-index p { margin: 0; }
+  .cover-story { grid-area: story; }
+  .cover-story h1 { max-width: 12ch; font-size: clamp(3.6rem, 5.8vw, 6rem); }
+  .cover-author { grid-area: author; align-self: center; }
+  .cover-agenda { grid-area: agenda; }
   .cover-agenda .agenda-list ol { display: grid; grid-template-columns: repeat(3, 1fr); }
   .cover-agenda .agenda-list li { border-right: 1px solid var(--line); }
   .author-layout { grid-template-columns: minmax(140px, .5fr) minmax(430px, 1.6fr) minmax(140px, .5fr); }
@@ -778,7 +791,7 @@ dd { margin: 0; }
   .menu-button { display: inline-flex; }
   .page-intro { padding-top: 3rem; grid-template-columns: 1fr; }
   .page-intro h1 { font-size: clamp(3.2rem, 12vw, 6rem); }
-  .cover { grid-template-columns: 120px 1fr 240px; gap: 1.5rem; }
+  .cover { grid-template-columns: minmax(0, 1.5fr) minmax(200px, .9fr); gap: 1.5rem; }
   .cover-story h1 { font-size: clamp(3.5rem, 9vw, 6rem); }
   .statement-grid { grid-template-columns: auto 1fr; }
   .statement-grid p, .statement-grid a { grid-column: 2; }
