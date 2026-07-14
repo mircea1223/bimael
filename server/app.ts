@@ -3,8 +3,8 @@ import express, { type NextFunction, type Request, type Response } from 'express
 import helmet from 'helmet'
 import { z } from 'zod'
 import type { DemoUser, Role } from '../src/domain/types'
-import { articles, authors, events, products } from '../src/data/seed'
-import { integrations } from './integrations'
+import { articles, authors, events, products } from '../src/data/seed.js'
+import { integrations } from './integrations.js'
 
 interface ServerUser extends DemoUser { passwordHash: string }
 interface AuthedRequest extends Request { actor?: ServerUser }
