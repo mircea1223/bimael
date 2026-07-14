@@ -5,6 +5,7 @@ test-results/
 playwright-report/
 .env
 .env.local
+.vercel/
 data/*.sqlite
 data/*.sqlite-*
 .DS_Store
